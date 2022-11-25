@@ -10,8 +10,11 @@ with open(input_file_name, "r") as input_file:
             continue
         split_line = line.split("\u2002")
         time = split_line[0].replace("[", "").replace("]", "")
-        artist, title = split_line[1].split(" - ")
-        cue_block = f"ITEM {item_count} SONG\nTITLE {title}\nARTISTS {artist}\nSTART 00:{time}\n"
+        if split_line[1].lower().startswith('ident'):
+            cue_block = f"ITEM {item_count} LINK\nTITLE ident\nARTISTS sweeper\nSTART 00:{time}\n\n"
+        else:
+            artist, title = split_line[1].split(" - ")
+            cue_block = f"ITEM {item_count} SONG\nTITLE {title}ARTISTS {artist}\nSTART 00:{time}\n\n"
         item_count += 1
         output_file_contents += cue_block
 
