@@ -17,5 +17,8 @@ with open(input_file_name, "r") as input_file:
             cue_block = f"ITEM {item_count} SONG\nTITLE {title}ARTISTS {artist}\nSTART 00:{time}\n\n"
         item_count += 1
         output_file_contents += cue_block
+    input_file.close()
 
-print(output_file_contents)
+with open(output_file_name+".cue", "w") as output_file:
+    output_file.write(output_file_contents)
+    output_file.close()
